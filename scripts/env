@@ -1,4 +1,4 @@
-FD=/vagrant/
+FD=/vagrant
 DIST="8" #"8.2"
 COMMIT=3
-WD=$FD/prolinux-$DIST
+WD=/root/prolinux-$DIST
