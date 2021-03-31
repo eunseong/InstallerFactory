@@ -25,7 +25,7 @@ echo -e "\n(1/5)Download and install the Installer meta files\n"
 wget -P /tmp/ http://pldev-repo-21.tk/prolinux-dev/ISO_meta/pl8_generic.tar.gz \
 	&& tar zxvf /tmp/pl8_generic.tar.gz --directory=$WD/ \
 	&& sed -i 's/8\.x/'$DIST'/g' $WD/media.repo $WD/.treeinfo $WD/.discinfo $WD/EFI/BOOT/* $WD/isolinux/* \
-	&& rm -f /tmp/pl8_generic.tar.gz
+	&& rm -f /tmp/pl8_generic*.tar.gz
 
 
 #Copy ProLinux packages
