@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 
-source env.sh
+source scripts/env.sh
 REPO=$FD/repo/pl-$DIST
 OUT=$FD/OUT_ISOs
 OUT_NAME=ProLinux-$DIST-GS.$COMMIT.iso
@@ -40,7 +40,7 @@ if [ -d $WD/AppStream/ ]; then
 fi
 if [[ ! -d $REPO/BaseOS || ! -d $REPO/AppStream ]]; then
 	echo -e "\n\nPrepare ProLinux package first!, end the image generation"
-	echo -e "Repo download guide: reposync http://pldev-repo-21.tk/prolinux/8.2/os/x86_64/BaseOS/"
+	echo -e "Repo download guide: reposync --repoid=pl-baseos"
 	exit 1
 fi
 cp -rT $REPO/BaseOS $WD/BaseOS 
