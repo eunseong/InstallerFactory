@@ -60,7 +60,8 @@ if [ -d $WD/AppStream/repodata ]; then
 fi
 createrepo_c -g $REPO/BaseOS/repodata/*comps-BaseOS.x86_64.xml $WD/BaseOS/
 createrepo_c -g $REPO/AppStream/repodata/*comps-AppStream.x86_64.xml $WD/AppStream/
-[[ -e $REPO/AppStream/repodata/*modules.yaml.gz ]] && gzip -d $REPO/AppStream/repodata/*modules.yaml.gz
+[[ -e $(echo $REPO/AppStream/repodata/*modules.yaml.gz) ]] && gzip -d $REPO/AppStream/repodata/*modules.yaml.gz
+[[ ! -e $(echo $REPO/AppStream/repodata/*modules.yaml) ]] && echo "modify target repodata" && exit 1
 modifyrepo_c $REPO/AppStream/repodata/*modules.yaml $WD/AppStream/repodata/
 
 
