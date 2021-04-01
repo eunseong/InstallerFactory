@@ -41,8 +41,8 @@ fi
 if [[ ! -d $REPO/BaseOS || ! -d $REPO/AppStream ]]; then
 	echo -e "\n\nPrepare ProLinux package first!, end the image generation"
 	echo -e "\tRepo download guide:"
-	echo -e "\t\treposync --repoid=pl8-BaseOS --downloaddir=$REPO --download-metadata"
-	echo -e "\t\treposync --repoid=pl8-AppStream --downloaddir=$REPO --download-metadata"
+	echo -e "\t\tdnf reposync --repoid=pl8-BaseOS --downloaddir=$REPO --download-metadata"
+	echo -e "\t\tdnf reposync --repoid=pl8-AppStream --downloaddir=$REPO --download-metadata"
 	exit 1
 fi
 cp -rT $REPO/BaseOS $WD/BaseOS 
