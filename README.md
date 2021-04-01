@@ -20,6 +20,6 @@ baseurl=http://pldev-repo-21.tk/prolinux/8.2/os/x86_64/AppStream
 gpgcheck=0
 EOF
 
-reposync --repoid=pl8-BaseOS --downloaddir=/vagrant/repo/pl-$DIST/ --download-metadata
-reposync --repoid=pl8-AppStream --downloaddir=/vagrant/repo/pl-$DIST/ --download-metadata
+dnf reposync --repoid=pl8-BaseOS --downloaddir=/vagrant/repo/pl-$DIST/ --download-metadata
+dnf reposync --repoid=pl8-AppStream --downloaddir=/vagrant/repo/pl-$DIST/ --download-metadata
 ```
