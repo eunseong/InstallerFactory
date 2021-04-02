@@ -21,4 +21,4 @@ lorax -c /etc/lorax/lorax.conf -p ProLinux --volid "ProLinux-"$DIST" Server.x86_
 #	-s http://pldev-repo-21.tk/prolinux-dev/GoodSoftware/gs_dev_repo \
 
 [ ! -d $LOGDIR ] && mkdir -p $LOGDIR
-mv $FD/*log $LOGDIR && mv $FD/*txt $LOGDIR && mv $FD/pkglists $LOGDIR
+mv $PWD/*log $LOGDIR && mv $PWD/*txt $LOGDIR && mv $PWD/pkglists $LOGDIR
