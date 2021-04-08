@@ -24,7 +24,7 @@ fi
 echo -e "\n(1/5)Download and install the Installer meta files\n"
 wget -P /tmp/ http://pldev-repo-21.tk/prolinux-dev/ISO_meta/pl8_generic.tar.gz \
 	&& tar zxvf /tmp/pl8_generic.tar.gz --directory=$WD/ \
-	&& sed -i 's/8\.x/'$DIST'/g' $WD/media.repo $WD/.treeinfo $WD/.discinfo $WD/EFI/BOOT/* $WD/isolinux/* \
+	&& sed -i 's/8\.x/'$DIST'/g' $WD/media.repo $WD/.treeinfo $WD/.discinfo $WD/EFI/BOOT/BOOT.conf $WD/EFI/BOOT/grub.cfg $WD/isolinux/isolinux.cfg \
 	&& rm -f /tmp/pl8_generic*.tar.gz
 
 
@@ -38,15 +38,15 @@ if [ -d $WD/AppStream/ ]; then
 	echo remove AppStream repo directory
 	rm -rf $WD/AppStream
 fi
-if [[ ! -d $REPO/BaseOS || ! -d $REPO/AppStream ]]; then
+if [[ ! -d $REPO/pl8-BaseOS || ! -d $REPO/pl8-AppStream ]]; then
 	echo -e "\n\nPrepare ProLinux package first!, end the image generation"
 	echo -e "\tRepo download guide:"
-	echo -e "\t\tdnf reposync --repoid=pl8-BaseOS --downloaddir=$REPO --download-metadata"
-	echo -e "\t\tdnf reposync --repoid=pl8-AppStream --downloaddir=$REPO --download-metadata"
+	echo -e "\t\tdnf reposync --repoid=BaseOS --downloaddir=$REPO --download-metadata"
+	echo -e "\t\tdnf reposync --repoid=AppStream --downloaddir=$REPO --download-metadata"
 	exit 1
 fi
-cp -rT $REPO/BaseOS $WD/BaseOS 
-cp -rT $REPO/AppStream $WD/AppStream
+cp -rT $REPO/pl8-BaseOS $WD/BaseOS 
+cp -rT $REPO/pl8-AppStream $WD/AppStream
 
 
 #Reset local repository metadata
@@ -59,11 +59,11 @@ if [ -d $WD/AppStream/repodata ]; then
 	echo remove AppStream repo-meta directory
 	rm -rf $WD/AppStream/repodata $WD/AppStream/.repodata
 fi
-createrepo_c -g $REPO/BaseOS/repodata/*comps-BaseOS.x86_64.xml $WD/BaseOS/
-createrepo_c -g $REPO/AppStream/repodata/*comps-AppStream.x86_64.xml $WD/AppStream/
-[[ -e $(echo $REPO/AppStream/repodata/*modules.yaml.gz) ]] && gzip -d $REPO/AppStream/repodata/*modules.yaml.gz
-[[ ! -e $(echo $REPO/AppStream/repodata/*modules.yaml) ]] && echo "modify target repodata" && exit 1
-modifyrepo_c $REPO/AppStream/repodata/*modules.yaml $WD/AppStream/repodata/
+createrepo_c -g $REPO/pl8-BaseOS/repodata/*comps-BaseOS.x86_64.xml $WD/BaseOS/
+createrepo_c -g $REPO/pl8-AppStream/repodata/*comps-AppStream.x86_64.xml $WD/AppStream/
+[[ -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml.gz) ]] && gzip -d $REPO/pl8-AppStream/repodata/*modules.yaml.gz
+[[ ! -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml) ]] && echo "modify target repodata" && exit 1
+modifyrepo_c $REPO/pl8-AppStream/repodata/*modules.yaml $WD/AppStream/repodata/
 
 
 echo -e "\n(4/5)Create Installer ISO\n"
