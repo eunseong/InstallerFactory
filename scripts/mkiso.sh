@@ -61,9 +61,15 @@ if [ -d $WD/AppStream/repodata ]; then
 fi
 createrepo_c -g $REPO/pl8-BaseOS/repodata/*comps-BaseOS.x86_64.xml $WD/BaseOS/
 createrepo_c -g $REPO/pl8-AppStream/repodata/*comps-AppStream.x86_64.xml $WD/AppStream/
-[[ -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml.gz) ]] && gzip -d $REPO/pl8-AppStream/repodata/*modules.yaml.gz
-[[ ! -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml) ]] && echo "modify target repodata" && exit 1
-modifyrepo_c $REPO/pl8-AppStream/repodata/*modules.yaml $WD/AppStream/repodata/
+pushd $REPO
+[[ ! -e $(echo $PWD/modules.yaml) ]] \
+	&& wget pldev-repo-21.tk/prolinux-dev/ISO_meta/modules_meta/modules-$DIST.yaml.gz \
+	&& gzip -d modules-$DIST.yaml.gz && mv modules-$DIST.yaml modules.yaml
+modifyrepo_c modules.yaml $WD/AppStream/repodata/
+popd
+#[[ -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml.gz) ]] && gzip -d $REPO/pl8-AppStream/repodata/*modules.yaml.gz
+#[[ ! -e $(echo $REPO/pl8-AppStream/repodata/*modules.yaml) ]] && echo "modify target repodata" && exit 1
+#modifyrepo_c $REPO/pl8-AppStream/repodata/*modules.yaml $WD/AppStream/repodata/
 
 
 echo -e "\n(4/5)Create Installer ISO\n"
