@@ -2,6 +2,7 @@
 set -xe
 
 source /vagrant/scripts/env
+source /vagrant/scripts/log
 REPO=$FD/repo/pl-$DIST
 OUT=$FD/OUT_ISOs
 OUT_NAME=ProLinux-$DIST-GS.$COMMIT.iso
