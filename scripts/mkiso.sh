@@ -74,9 +74,9 @@ popd
 
 
 echo -e "\n(4/5)Create Installer ISO\n"
-mkisofs -U -r -v -T -J -joliet-long -allow-limited-size -V "ProLinux-"$DIST" Server.x86_64" -volset "ProLinux-"$DIST" Server.x86_64" \
-			-b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 \
-			-boot-info-table -eltorito-alt-boot -e images/efiboot.img -no-emul-boot -o $OUT/$OUT_NAME $WD/
+mkisofs -o $OUT/$OUT_NAME -b isolinux/isolinux.bin -J -R -l -c isolinux/boot.cat -no-emul-boot \
+	-boot-load-size 4 -boot-info-table -eltorito-alt-boot -e images/efiboot.img \
+	-no-emul-boot -graft-points -V "ProLinux-"$DIST" Server.x86_64" $WD/
 
 
 echo -e "\n(5/5)Implant&Check md5 checksum in the ISO\n"
