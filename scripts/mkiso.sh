@@ -74,7 +74,7 @@ popd
 
 
 echo -e "\n(4/5)Create Installer ISO\n"
-mkisofs -o $OUT/$OUT_NAME -b isolinux/isolinux.bin -J -R -l -c isolinux/boot.cat -no-emul-boot \
+mkisofs -o $OUT/$OUT_NAME -joliet-long -b isolinux/isolinux.bin -J -R -l -c isolinux/boot.cat -no-emul-boot \
 	-boot-load-size 4 -boot-info-table -eltorito-alt-boot -e images/efiboot.img \
 	-no-emul-boot -graft-points -V "ProLinux-"$DIST" Server.x86_64" $WD/
 
