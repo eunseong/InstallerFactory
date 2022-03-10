@@ -20,8 +20,8 @@ fi
 setenforce 0
 lorax --product="$PRODUCT" --version="$VERSION" \
   --release="$RELEASE" --variant=$VARIANT \
-  --source="http://dev-repo/prolinux/8.4/os/x86_64/BaseOS" \
-  --source="http://dev-repo/prolinux/8.4/os/x86_64/AppStream" \
+  --source="http://dev-repo/prolinux/$VERSION/os/x86_64/BaseOS" \
+  --source="http://dev-repo/prolinux/$VERSION/os/x86_64/AppStream" \
   --nomacboot --noupgrade --isfinal \
   --buildarch="$PROC" --volid="$VOLID" $WD
 setenforce 1
