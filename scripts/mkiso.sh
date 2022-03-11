@@ -99,13 +99,14 @@ mkisofs -o $OUT/$OUT_NAME \
    	$WD/
 
 
-echo -e "\n(4/5)Implant&Check md5 checksum in the ISO\n"
+echo -e "\n(4/5)Set the media as a bootable ISO\n"
+isohybrid $OUT/$OUT_NAME
+
+
+echo -e "\n(5/5)Implant&Check md5 checksum in the ISO\n"
 implantisomd5 $OUT/$OUT_NAME
 checkisomd5 $OUT/$OUT_NAME
 
-
-echo -e "\n(5/5)Set the media as a bootable ISO\n"
-isohybrid $OUT/$OUT_NAME
 
 echo -e "\n\nInstaller build complete!"
 echo "Installer ISO file size is" $(du -hs "$OUT"/"$OUT_NAME")
