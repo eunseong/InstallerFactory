@@ -76,7 +76,7 @@ echo -e "\n"
 if [ -d $WD/AppStream ]; then
 	read -p "AppStream repo already exists. Remove this? [y/n]: " res
 	if [ "$res" == "y" ] || [ "$res" == "Y" ]; then
-		echo remove AppStream repo-meta directory
+		echo remove AppStream repo directory
 		rm -rf $WD/AppStream
 		dnf reposync --repoid=AppStream --downloaddir=$WD --download-metadata
 	fi
